@@ -523,9 +523,13 @@
 	"build_system": "Packages/JSHint/JSHint.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 60.0,
 		"selected_items":
 		[
+			[
+				"convert to tab",
+				"Indentation: Convert to Tabs"
+			],
 			[
 				"comment",
 				"Toggle Comment"
@@ -748,6 +752,11 @@
 	},
 	"file_history":
 	[
+		"/F/Projects/DevfestSlides/theme/scss/default.scss",
+		"/F/Projects/DevfestSlides/index.html",
+		"/F/Projects/DevfestSlides/slide_config.js",
+		"/F/Projects/DevfestSlides/scripts/md/base.html",
+		"/F/Projects/DevfestSlides/js/slide-deck.js",
 		"/C/xampp/htdocs/www/Vanguard/scripts/templates/Security/Gre.html",
 		"/C/xampp/htdocs/www/js/servicelayer.js",
 		"/F/WorkspaceMaven/www/system/libraries/Controller.php",
@@ -870,12 +879,7 @@
 		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/IpSecurityView.js",
 		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/content/common/html.css",
 		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/index.html",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/stylesheets/content.css",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/UnitStatusBody.js",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/UnitStatusBodyView.js",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/TopView.js",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/IpSecurityView.js",
-		"/C/Users/mmanrique/Desktop/debug.log"
+		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/stylesheets/content.css"
 	],
 	"find":
 	{
@@ -883,9 +887,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 107.0,
 		"where_history":
 		[
+			"<project>",
 			"C:\\xampp\\htdocs\\www\\Fusion",
 			"C:\\xampp\\htdocs\\www\\Fusion\\scripts\\templates",
 			"<project>",
@@ -897,6 +902,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Google IO 2012",
+			" ',",
+			"Google IO\nGoogle IO",
+			"HTML 5 -",
+			"devfestlima",
+			"Lima",
+			"$social-tags",
+			"www.flickr.com/photos/25797459@N06/5438799763/",
 			"#job_details_view .wr",
 			"#job_details_view .wr > label",
 			"download_application_view",
@@ -1016,15 +1029,7 @@
 			"uploadDone",
 			"upload_target_application",
 			"this",
-			"maintenanceView",
-			"ipSecurityTemplate",
-			"fillData",
-			"]\n",
-			"this",
-			"View",
-			"ApplicationRouterView",
-			"this",
-			"cesConfig"
+			"maintenanceView"
 		],
 		"highlight": true,
 		"in_selection": false,
