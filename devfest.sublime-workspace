@@ -523,9 +523,17 @@
 	"build_system": "Packages/JSHint/JSHint.sublime-build",
 	"command_palette":
 	{
-		"height": 60.0,
+		"height": 210.0,
 		"selected_items":
 		[
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"convert to t",
+				"Indentation: Convert to Tabs"
+			],
 			[
 				"convert to tab",
 				"Indentation: Convert to Tabs"
@@ -752,8 +760,12 @@
 	},
 	"file_history":
 	[
-		"/F/Projects/DevfestSlides/theme/scss/default.scss",
 		"/F/Projects/DevfestSlides/index.html",
+		"/F/Projects/DevfestSlides/external/webaudio/index.html",
+		"/F/Projects/DevfestSlides/external/webintents/index.html",
+		"/F/Projects/DevfestSlides/external/mobile/index.html",
+		"/F/Projects/DevfestSlides/external/mobile.html",
+		"/F/Projects/DevfestSlides/theme/scss/default.scss",
 		"/F/Projects/DevfestSlides/slide_config.js",
 		"/F/Projects/DevfestSlides/scripts/md/base.html",
 		"/F/Projects/DevfestSlides/js/slide-deck.js",
@@ -875,11 +887,7 @@
 		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/Maintenance/MaintenanceMain",
 		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/UnitStatusBody/UnitStatusBodyView.js",
 		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/UnitStatusBody/UnitStatusTabsView.js",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/templates/Maintenance/MaintenanceTabs",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/views/IpSecurityView.js",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/content/common/html.css",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/index.html",
-		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/stylesheets/content.css"
+		"/C/Users/mmanrique/Desktop/Calamp/DM Bulk Configuration/Fusion UI HTML Source/templating/js/templates/Maintenance/MaintenanceTabs"
 	],
 	"find":
 	{
@@ -887,7 +895,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 107.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"<project>",
@@ -902,6 +910,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"</p>",
+			"<p>",
+			"compa",
+			"input",
+			"&gt;",
+			"&lt;",
 			"Google IO 2012",
 			" ',",
 			"Google IO\nGoogle IO",
@@ -1023,13 +1037,7 @@
 			"replace",
 			"display_Router_Configuration",
 			"ApplicationFileDetails",
-			"ApplicationFileDeta",
-			"edit",
-			"java_service_hostname",
-			"uploadDone",
-			"upload_target_application",
-			"this",
-			"maintenanceView"
+			"ApplicationFileDeta"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1037,6 +1045,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			">",
+			"<",
 			"",
 			"/images/",
 			"../images",

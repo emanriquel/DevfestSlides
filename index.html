@@ -578,12 +578,15 @@
 			<h1>WebAdio API</h1>
 			<p>Analisis de los datos de sonido</p>
 			<p>Creacion de sonidos propios (mediante frecuencias)</p>
-			<select id="fuente">
-				<option value="../../resources/rushus-modal_blues.mp3">Blues</option>
-			</select>
-			<button value="start" id="iniciar">Iniciar</button>
-			<canvas id='canvas1'>
-			</canvas>​
+			<div>
+				<select id="fuente">
+					<option value="../../resources/rushus-modal_blues.mp3">Blues</option>
+				</select>
+				<button value="start" id="iniciar">Iniciar</button>
+				<canvas id='canvas1'>
+				</canvas>​	
+			</div>
+			
 
 	<script type="text/javascript">
 	//var url = '../../resources/star-wars.m4a';
@@ -787,12 +790,12 @@
 		<hgroup>
 			<h2>WebSql vs Indexed DB</h2>
 		</hgroup>
-		<article>
+		<article class="build fade">
 			<p>Permiten crear bases de datos en el browser</p>
 			<p>Ambos estuvieron a la par</p>
 			<p>Pero en Noviembre del 2010, se retira WebSQL</p>
 			<p>Indexed DB es el actual estandar</p>
-			<img src="images/websql.png" alt="WebSql support" />
+			<img src="images/websql.png" alt="WebSql support" style="width: 100%;">
 		</article>
 	</slide>
 	<slide>
@@ -800,7 +803,7 @@
 			<h2>Diferencias</h2>
 			<h1>Round 1</h1>
 		</hgroup>
-		<article>
+		<article class="build">
 			<pre class="prettyprint" data-lang="JavaScript">
 openDatabase("Todo", "1.0", "Todo manager", dbSize);
 tx.executeSql("CREATE TABLE IF NOT EXISTS 
@@ -829,10 +832,16 @@ objectStore.put({
 					}
 				</style>
 				<div>
-					<label for="byName">Por Nombre</label>
+					<p>Busqueda</p>
+					<ul>
+						<li>
+							<label for="byName">Por Nombre</label>
 					<input type="search" id="searchbox" placeholder="Nombre" name="byName">
 					<label for="byNumber">Por Numero</label>
 					<input type="search" id="searchNumber" placeholder="Numero" name="byNumber">
+						</li>
+					</ul>
+					
 				</div>
 				<div id="Inputs">
 					<input type="text" placeholder="Nombre" name="nombre" id="nombre">
@@ -1119,7 +1128,7 @@ objectStore.put({
 			<h2>No suena familiar?</h2>
 		</hgroup>
 		<article class="flexbox vcenter">
-			<span><img src="android_intents" alt=""></span>
+			<span><img src="images/android_intents" alt=""></span>
 		</article>
 	</slide>
 	<slide class="fill nobackground" style="background: url(images/tired.jpg);background-size:100% 100%;">
