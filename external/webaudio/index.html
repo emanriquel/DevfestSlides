@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<select id="fuente">
+		<option value="../../resources/rushus-modal_blues.mp3">Blues</option>
+	</select>
+	<button value="start" id="iniciar">Iniciar</button>
+	<canvas id='canvas1'>
+	</canvas>​
+
+	<script type="text/javascript">
+	//var url = '../../resources/star-wars.m4a';
+		var url;
+		var source;
+		var context=new webkitAudioContext();;
+		var analyser = context.createAnalyser();
+		analyser.connect(context.destination);
+		var canvas = document.getElementById('canvas1');
+		var canvasContext = canvas.getContext('2d');
+
+
+		function playSound(buffer) {
+			source = context.createBufferSource();
+			
+			//var gainNode = context.createGainNode();
+			//Now we create an analizer
+			source.buffer = buffer;
+			source.connect(analyser);
+			
+			//    gainNode.connect(context.destination);
+			//    gainNode.gain.value=2;
+			source.noteOn(0);
+		}
+
+		function init() {
+			var request = new XMLHttpRequest();
+			request.open('GET', url, true);
+			request.responseType = 'arraybuffer';
+			request.onload = function() {
+				context.decodeAudioData(request.response, function(buffer) {
+					//let's play it then
+					playSound(buffer);
+				});
+			};
+			request.send();
+		}
+
+		function draw() {
+			window.webkitRequestAnimationFrame(draw);
+			render();
+		}
+		
+		var height = canvas.height = 500;
+		var width = canvas.width = window.innerWidth;
+		var spacer = 5;
+
+
+
+		function render() {
+			//Get the Sound data
+			if(analyser!=null){
+				var freqByteData = new Uint8Array(analyser.frequencyBinCount);
+				analyser.getByteFrequencyData(freqByteData); //analyser.getByteTimeDomainData(freqByteData);
+				//we Clear the Canvas
+				canvasContext.beginPath();
+				canvasContext.clearRect(0, 0, width, height);
+				canvasContext.fillStyle = '#9C355E';
+				canvasContext.lineCap = 'round';
+				canvasContext.fill();
+				for(var i = 0; i < analyser.frequencyBinCount; i++) {
+					canvasContext.fillRect(i * spacer, height, 3, -freqByteData[i]);
+				}	
+			}
+			
+
+		}
+		var iniciar=document.getElementById("iniciar");
+		iniciar.addEventListener("click",function(){
+			if(source){
+				source.disconnect(analyser);
+				//analyser.disconnect(source);
+			}
+			url=document.getElementById("fuente").value;
+			init();
+			draw();
+		});
+	</script></body>
+</html>

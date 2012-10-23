@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<video autoplay id="videostream"></video>
+			 <script type="text/javascript">
+			 navigator.getUserMedia=navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+			 window.URL = window.URL || window.webkitURL || window.mozURL;
+			 navigator.getUserMedia({video:true}, function(localMediaStream){
+					var video = document.getElementById("videostream");
+					video.src = window.URL.createObjectURL(localMediaStream);
+			 },function(error){
+			 	alert("oops, no puedo obtener la camara");
+			 });
+			 </script>
+</body>
+</html>

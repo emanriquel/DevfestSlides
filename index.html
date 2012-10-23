@@ -564,8 +564,127 @@
 	            		audioClip.setAttribute("controls","");
 	            	}
 	            }
+	            </script>
 		</article>
 	</slide>
+
+	<slide>
+		<hgroup>
+			<h2>Sexy Audio</h2>
+		</hgroup>
+		<article>
+			<h1>WebAdio API</h1>
+			<p>Analisis de los datos de sonido</p>
+			<p>Creacion de sonidos propios (mediante frecuencias)</p>
+			<iframe data-src="external/webaudio/index.html" />
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Video Tag</h2>
+		</hgroup>
+		<article class="build">
+			<p>Similar al tag de audio</p>
+			<pre class="prettyprint" data-lang="HTML">
+&lt;video width="320" height="240" controls="controls"&gt;
+	&lt;source src="movie.mp4" type="video/mp4"&gt;
+	&lt;source src="movie.ogg" type="video/ogg"&gt;
+	Your browser does not support the video tag.
+&lt;/video&gt;
+			</pre>
+			<div class="flexbox vcenter">
+				<video controls="" autobuffer >  
+	    		<source src="resources/chrome.webm" type="video/webm">
+	    		<source src="resources/chrome.ogv" type="video/ogg">
+	    		<source src="resources/chrome.mp4" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'">
+	    		<p>This browser does not support the video element.</p>
+	  	</video>	
+			</div>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Manipulacion de Imagenes</h2>
+		</hgroup>
+		<article class="build">
+				<p>Manipulacion de video <a href="external/videomanipulation/index.html">mediante Canvas</a></p>
+				<p>Manipulacion de video mediante filtros css</p>
+				<div class="flexbox vcenter">
+					<style type="text/css">
+					.blur{
+						-webkit-filter: blur(10px);
+					}
+					.gray{
+						-webkit-filter:  grayscale(1);
+					}
+					.shadow{
+						-webkit-filter: drop-shadow(20px 20px 20px black);
+					}
+					.sepia{
+						-webkit-filter: sepia(1);
+					}
+					</style>
+					<video id="videoeffects" controls="" autobuffer >  
+		    		<source src="resources/chrome.webm" type="video/webm">
+		    		<source src="resources/chrome.ogv" type="video/ogg">
+		    		<source src="resources/chrome.mp4" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'">
+		    		<p>This browser does not support the video element.</p>
+	  			</video>
+	  			<div id="controls" style="text-align: center;">
+	  				<button onclick="bluer();">Blur</button>
+	  				<button onclick="gray();">Grayscale</button>
+	  				<button onclick="shadow();">Shadow</button>
+	  				<button onclick="sepia();">Sepia</button>
+	  				<div id="filter"></div>
+	  			</div>
+	  			<script type="text/javascript">
+	  			function bluer(){
+	  				document.getElementById("filter").innerHTML="-webkit-filter: blur(10px);";
+	  				document.getElementById("videoeffects").classList.toggle("blur");
+	  			}
+	  			function gray(){
+	  				document.getElementById("filter").innerHTML="	-webkit-filter:  grayscale(1);";
+	  				document.getElementById("videoeffects").classList.toggle("gray");
+	  			}
+	  			function shadow(){
+	  				document.getElementById("filter").innerHTML="-webkit-filter: drop-shadow(20px 20px 20px black);";
+	  				document.getElementById("videoeffects").classList.toggle("shadow");
+	  			}
+	  			function sepia(){
+	  				document.getElementById("filter").innerHTML="-webkit-filter: sepia(1);";
+	  				document.getElementById("videoeffects").classList.toggle("sepia");
+	  			}
+	  			</script>
+				</div>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Acceso a dispositivos nativos</h2>
+		</hgroup>
+		<article class="build">
+			<p>Acceso al microphono</p>
+			<p>
+				<input type="text" x-webkit-speech>
+			</p>
+			<p>Acceso a la camara <a href="external/videostream/index.html">mediante video</a></p>
+			<p>Y para dispositivos moviles?</p>
+			<p>
+				<ul>
+					<li>
+						<input type="file" accept="image/*;capture=camera">
+					</li>
+					<li>
+						<input type="file" accept="video/*;capture=camcorder">
+					</li>
+					<li>
+						<input type="file" accept="audio/*;capture=microphone">						
+					</li>
+				</ul>
+			</p>
+		</article>
+	</slide>
+
 	<slide>
 		<hgroup>
 			<h2>Slide with Bullets</h2>
