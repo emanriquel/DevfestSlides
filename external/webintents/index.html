@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<intent action="http://webintents.org/view" type="text/uri-list">
+		<input type="text" id="url" style="width:300px;" value="http://devfestlima.gdglima.pe/"  placeholder="Ingresa un URL">
+		<button id="clickme" value="Share">Share</button>
+	<script type="text/javascript">
+		var Intent = window.Intent || window.WebKitIntent;
+   		var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+			window.intent = window.intent || window.webkitIntent;
+
+			var url=document.getElementById("url").value;
+			document.getElementById("clickme").addEventListener("click",function(){
+				var intent = new Intent( 'http://webintents.org/share', 'text/uri-list',[url]);
+				startActivity.call(window.navigator,intent,function(data){
+					console.log(data);
+				});
+			});
+
+	  
+	</script>
+</intent>
+</body>
+</html>

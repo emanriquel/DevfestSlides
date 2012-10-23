@@ -166,6 +166,8 @@
 			<p>Apple le dice no a Flash</p>
 			<p>Google libera Chrome</p>
 			<p>Firefox si dispara en versiones</p>
+			<p>Adobe apoya mas a HTML5</p>
+			<p>Internet Explorer deja de ser el explorador mas usado</p>
 		</article>
 	</slide>
 	<slide>
@@ -576,7 +578,90 @@
 			<h1>WebAdio API</h1>
 			<p>Analisis de los datos de sonido</p>
 			<p>Creacion de sonidos propios (mediante frecuencias)</p>
-			<iframe data-src="external/webaudio/index.html"></iframe>
+			<select id="fuente">
+				<option value="../../resources/rushus-modal_blues.mp3">Blues</option>
+			</select>
+			<button value="start" id="iniciar">Iniciar</button>
+			<canvas id='canvas1'>
+			</canvas>​
+
+	<script type="text/javascript">
+	//var url = '../../resources/star-wars.m4a';
+		var url;
+		var source;
+		var context=new webkitAudioContext();;
+		var analyser = context.createAnalyser();
+		analyser.connect(context.destination);
+		var canvas = document.getElementById('canvas1');
+		var canvasContext = canvas.getContext('2d');
+
+
+		function playSound(buffer) {
+			source = context.createBufferSource();
+			
+			//var gainNode = context.createGainNode();
+			//Now we create an analizer
+			source.buffer = buffer;
+			source.connect(analyser);
+			
+			//    gainNode.connect(context.destination);
+			//    gainNode.gain.value=2;
+			source.noteOn(0);
+		}
+
+		function init() {
+			var request = new XMLHttpRequest();
+			request.open('GET', url, true);
+			request.responseType = 'arraybuffer';
+			request.onload = function() {
+				context.decodeAudioData(request.response, function(buffer) {
+					//let's play it then
+					playSound(buffer);
+				});
+			};
+			request.send();
+		}
+
+		function draw() {
+			window.webkitRequestAnimationFrame(draw);
+			render();
+		}
+		
+		var height = canvas.height = 500;
+		var width = canvas.width = 500;
+		var spacer = 5;
+
+
+
+		function render() {
+			//Get the Sound data
+			if(analyser!=null){
+				var freqByteData = new Uint8Array(analyser.frequencyBinCount);
+				analyser.getByteFrequencyData(freqByteData); //analyser.getByteTimeDomainData(freqByteData);
+				//we Clear the Canvas
+				canvasContext.beginPath();
+				canvasContext.clearRect(0, 0, width, height);
+				canvasContext.fillStyle = '#9C355E';
+				canvasContext.lineCap = 'round';
+				canvasContext.fill();
+				for(var i = 0; i < analyser.frequencyBinCount; i++) {
+					canvasContext.fillRect(i * spacer, height, 3, -freqByteData[i]);
+				}	
+			}
+			
+
+		}
+		var iniciar=document.getElementById("iniciar");
+		iniciar.addEventListener("click",function(){
+			if(source){
+				source.disconnect(analyser);
+				//analyser.disconnect(source);
+			}
+			url=document.getElementById("fuente").value;
+			init();
+			draw();
+		});
+	</script>
 		</article>
 	</slide>
 
@@ -677,6 +762,388 @@
 &lt;input type="file" accept="audio/*;capture=microphone" /&gt;
 			</pre>
 			</p>
+		</article>
+	</slide>
+
+	<slide>
+		<article class="flexbox vcenter">
+			<span><img src="images/HTML5_Offline_Storage_128.png" alt=""></span>
+			<h1>Storage</h1>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Client-side Storage</h2>	
+		</hgroup>
+		<article>
+			<p>Persistir datos importantes para el cliente</p>
+			<p>Asiste a las aplicaciones offline</p>
+			<p>Varios tiempos de persistencia</p>
+			<p>Varios tipos de datos pueden ser persistidos</p>
+			<p>SqlLite en Nativo</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>WebSql vs Indexed DB</h2>
+		</hgroup>
+		<article>
+			<p>Permiten crear bases de datos en el browser</p>
+			<p>Ambos estuvieron a la par</p>
+			<p>Pero en Noviembre del 2010, se retira WebSQL</p>
+			<p>Indexed DB es el actual estandar</p>
+			<img src="images/websql.png" alt="WebSql support" />
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Diferencias</h2>
+			<h1>Round 1</h1>
+		</hgroup>
+		<article>
+			<pre class="prettyprint" data-lang="JavaScript">
+openDatabase("Todo", "1.0", "Todo manager", dbSize);
+tx.executeSql("CREATE TABLE IF NOT EXISTS 
+todo(ID INTEGER PRIMARY KEY ASC, todo TEXT, added_on DATETIME)"
+tx.executeSql("SELECT * FROM todo",...)
+			</pre>
+			<pre class="prettyprint" data-lang="JavaScript">
+indexedDB.open("GDG2Lima"); ...
+db.createObjectStore("Asistentes",{keyPath: "Nombre"}); ...
+objectStore.put({
+	"Nombre": Math.random()+"",
+	"Apellido": "Manrique"
+});
+			</pre>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Ejemplo con Indexed DB</h2>
+		</hgroup>
+		<article>
+			<section id="ContactListApp">
+				<style type="text/css">
+					input:invalid{
+						border:1px solid red;
+					}
+				</style>
+				<div>
+					<label for="byName">Por Nombre</label>
+					<input type="search" id="searchbox" placeholder="Nombre" name="byName">
+					<label for="byNumber">Por Numero</label>
+					<input type="search" id="searchNumber" placeholder="Numero" name="byNumber">
+				</div>
+				<div id="Inputs">
+					<input type="text" placeholder="Nombre" name="nombre" id="nombre">
+					<input type="text" placeholder="Apellido" name="apellido" id="apellido">
+					<input type="text" placeholder="Direccion" name="direccion" id="direccion">
+					<input type="tel" pattern="^\(?\d{3}\)?[-\s]\d{3}[-\s]\d{4}.*?$" placeholder="(555) 555-5555" name="telefono" id="telefono">
+				</div>
+				<ul id="ContactList">
+				</ul>	
+	</section>
+	<section id="controls">
+		<button id="guardarButton">Guardar</button>
+		<button id="enviarButton">Enviar</button>
+	</section>
+	<script type="text/javascript">
+	window.indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
+	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.mozIDBKeyRange;
+
+	//IDBTransaction is deprected to use as READ_WRITE
+	//window.IDBTransaction=window.IDBTransaction || window.webkitIDBTransaction || window.mozIDBTransaction;
+
+
+	function Application() {
+		this.version = "0.1";
+		this.databaseName = "HTML5";
+		this.database;
+		this.contactList = document.getElementById("ContactList");
+	};
+	Application.prototype.initdatabase = function() {
+		var self = this;
+		//indexedDB.deleteDatabase(this.databaseName);
+		var openRequest = indexedDB.open(this.databaseName);
+		openRequest.onsuccess = function(event) {
+			var db = event.target.result;
+			self.database = db;
+			//The database is created at this point. Version is not null or undefinided. There is simply no version
+			if (db.version != self.version) {
+				//Different Versions, let's update it by creating the needed ObjectStores
+				//let's change the version first
+
+				var setVersionRequest = db.setVersion(self.version);
+				setVersionRequest.onsuccess = function(e) {
+					//Here we can create a different ObjectStore
+					//db.objectStoreNames retursn and Array with all the Tables names.
+					//db.deleteObjectStore(name) removes an Object Store
+					var objectStore = db.createObjectStore("objectStore", {
+						keyPath: "Nombre"
+					});
+					objectStore.createIndex("Telefono", "Telefono",{unique:true});
+					e.target.transaction.oncomplete = self.getDataOut.bind(self);
+				};
+				setVersionRequest.onerror = function(e) {
+					console.log("Version Request Failed");
+				};
+			} else {
+				//Same version, let's just get the data out
+				self.getDataOut();
+			}
+
+		};
+		openRequest.onerror = function(event) {
+			console.log("Database could not be initialized");
+		}
+	};
+
+	Application.prototype.getDataOut = function() {
+		this.contactList.innerHTML = "";
+		var self = this;
+		var database = this.database;
+		var transaction = database.transaction(["objectStore"], "readonly");
+		var objectStore = transaction.objectStore("objectStore");
+		//We define from where to where;
+		var keyRange = IDBKeyRange.lowerBound("0");
+		//Now, let's open a cursor. The optional parameter means the direction of the cursor: next |nextUnique|prev|prevunique
+		var cursorRequest = objectStore.openCursor(keyRange);
+		cursorRequest.onsuccess = function(e) {
+			//this is the object, the row, the entry, the Valhala
+			var result = e.target.result;
+			//Is it not a value? did it end?
+			if ( !! result == false) {
+				return;
+			}
+			//otherwise, just continue fetching
+			self.render(result.value);
+			result.continue ();
+		};
+		cursorRequest.onerror = function() {
+			console.log("Could not open Cursor");
+		}
+	};
+
+
+
+	Application.prototype.insertData = function(nombre, apellido, direccion, telefono) {
+		var self = this;
+		var database = this.database;
+		var transaction = database.transaction(["objectStore"], "readwrite");
+		var objectStore = transaction.objectStore("objectStore");
+		var putRequest = objectStore.put({
+			"Apellido": apellido,
+			"Nombre": nombre,
+			"Direccion": direccion,
+			"Telefono": telefono
+
+		});
+		putRequest.onsuccess = function(e) {
+			//after it's saved, clear the values;
+			self.getDataOut();
+
+		}
+		putRequest.onerror = function(e) {
+			console.log("Not Saved");
+		}
+	};
+	Application.prototype.removeObject = function(Key) {
+		var db = this.database;
+		var transaction = db.transaction(["objectStore"], "readwrite");
+		var store = transaction.objectStore("objectStore");
+		var deleteRequest = store.delete(Key);
+		deleteRequest.onsuccess = this.getDataOut.bind(this);
+		deleteRequest.onerror = function() {
+			console.log("Error");
+		}
+	};
+
+	Application.prototype.searchByQuery=function(text){
+		var self=this;
+		this.contactList.innerHTML = "";
+		var db=this.database;
+		var transaction=db.transaction(["objectStore"], "readonly");
+		var objectStore=transaction.objectStore("objectStore", "prev");
+		var keyRange=IDBKeyRange.bound(text,text);
+		var openCursorRequest=objectStore.openCursor(keyRange);
+		openCursorRequest.onsuccess=function(e){
+			var result = e.target.result;
+			if ( !! result == false) {
+				return;
+			}
+			self.render(result.value);
+			result.continue();
+		};
+		openCursorRequest.onerror=function(){
+			console.log("Error");
+		};
+	};
+
+	Application.prototype.searchByNumber=function(number){
+		var self=this;
+		this.contactList.innerHTML = "";
+		var db=this.database;
+		var transaction=db.transaction(["objectStore"], "readonly");
+		var objectStore=transaction.objectStore("objectStore");
+		var index=objectStore.index("Telefono");
+		//Once we have the Index, we can query with KeyRange or with the id
+		var keyRange=IDBKeyRange.lowerBound(number);
+		var openCursorRequest=index.openCursor(keyRange);
+		openCursorRequest.onsuccess=function(e){
+			var result = e.target.result;
+			if ( !! result == false) {
+				return;
+			}
+			self.render(result.value);
+			result.continue();
+
+		};
+		openCursorRequest.onerror=function(e){
+			console.log("Error "+e);
+		};
+
+	};
+
+
+	Application.prototype.render = function(element) {
+		var ul = document.getElementById("ContactList");
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.textContent = " X";
+		var self = this;
+		a.addEventListener("click", function(e) {
+			self.removeObject(element.Nombre);
+		}, false);
+		var text = document.createTextNode();
+		text.data = element.Nombre;
+		li.appendChild(text);
+		li.appendChild(a);
+		ul.appendChild(li);
+		//Render the Element in the UL
+	};
+
+
+
+	var application = new Application();
+	application.initdatabase();
+
+	var guardarButton = document.getElementById("guardarButton");
+	var searchbox=document.getElementById("searchbox");
+	var searchNumber=document.getElementById("searchNumber");
+
+
+	var nombre = document.getElementById("nombre");
+	var apellido = document.getElementById("apellido");
+	var direccion = document.getElementById("direccion");
+	var telefono = document.getElementById("telefono");
+	guardarButton.addEventListener("click", function() {
+		application.insertData(nombre.value, apellido.value, direccion.value, telefono.value);
+	}, false);
+	searchbox.addEventListener("keyup",function(){
+		application.searchByQuery(searchbox.value);
+	}, false);
+	searchNumber.addEventListener("keyup",function(){
+		application.searchByNumber(searchNumber.value);
+	},false);
+
+	</script>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Lo nuevo en Storage</h2>
+		</hgroup>
+		<article>
+			<p>Archivos en el Browser</p>
+			<p>File system API</p>
+			<p>Estructura de archivos tal como un File System</p>
+			<p>Soportado actualmente solo por <a href="http://caniuse.com/#feat=filesystem">Chrome</a></p>
+			<ul>
+				<li><a href="external/picfiltering/index.html">Demo</a>: FileReader API</li>
+				<li><a href="external/filesystem/index.html">Demo:</a> FileSystem API por <a href="https://twitter.com/ebidel">Eric Bidelman</a> </li>
+			</ul>
+		</article>
+	</slide>
+
+	<slide>
+		<article class="flexbox vcenter">
+			<span><img src="images/HTML5_Connectivity_128.png" alt=""></span>
+			<h1>Conectividad</h1>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>WebRTC</h2>
+			<h1>Mira mama, sin Plugins</h1>
+		</hgroup>
+		<article>
+			<ul class="build fade">
+				<li>RTC: Real-Time Comunication</li>
+				<li>Llamadas entre dispositivos sin necesidad de aplicaciones</li>
+				<li>Necesario: Acceso a Camara y a Microfono</li>
+				<li><a href="http://www.webrtc.org/">WebRTC.org</a></li>
+				<li>Nuevas API's para desarrolladores	</li>
+			</ul>
+		</article>
+	</slide>
+	<slide class="fill nobackground" style="background: url(images/services.jpg);background-size:100% 100%;">
+		<hgroup>
+			<h2>La web tiene un problema</h2>
+		</hgroup>
+		<footer class="source">Imagina integrar todo eso</footer>
+	</slide>
+	<slide class="fill nobackground" style="background: url(images/no.png);background-size:100% 100%;;">
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Nace WebIntents</h2>
+		</hgroup>
+		<article>
+			<ul class="build">
+				<li>
+					Web Intents es un framework para el descubrimiento de servicios del lado del cliente y la comunicación entre aplicaciones
+				</li>
+				<li>
+					Un servicio registra su intencion de manejar una accion del usuario
+				</li>
+				<li>
+					Una aplicacion solicita iniciar una accion (compartir, editar, elegir, etc)
+				</li>
+				<li>
+				</li>
+			</ul>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>No suena familiar?</h2>
+		</hgroup>
+		<article class="flexbox vcenter">
+			<span><img src="android_intents" alt=""></span>
+		</article>
+	</slide>
+	<slide class="fill nobackground" style="background: url(images/tired.jpg);background-size:100% 100%;">
+		<hgroup>
+			<h2>Ha sido bastante</h2>
+		</hgroup>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Pero aun no acaba</h2>
+		</hgroup>
+		<article>
+			<ul>
+				<li><a href="http://www.w3.org/TR/css3-flexbox/">Flexbox</a></li>
+				<li>
+					<a href="http://www.adobe.com/devnet/html5/articles/css3-regions.html">CSS Regions/Exclusions</a>
+				</li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch Events</a></li>
+				<li><a href="https://developer.mozilla.org/en-US/docs/Detecting_device_orientation">Device Orientation</a></li>
+				<li><a href="http://www.w3schools.com/html/html5_draganddrop.asp">Drag and Drop</a></li>
+				<li><a href="https://dvcs.w3.org/hg/gamepad/raw-file/default/gamepad.html">Gamepad API</a></li>
+				<li><a href="http://www.w3.org/TR/html5-diff/">Y muchos otros</a></li>
+			</ul>
+
 		</article>
 	</slide>
 
