@@ -139,13 +139,433 @@
 			<li>Firefox</li>
 			<li>Chrome</li>
 			</ul>
-			
-			<img src="images/browser-wars1.jpg" alt="browser wars">
+			<div class="flexbox vcenter">
+				<a href="http://dowebsitesneedtolookexactlythesameineverybrowser.com/"><img src="images/browser-wars1.jpg" alt="browser wars"></a>
+			</div>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>HTML5 Inicia</h2>
+		</hgroup>
+		<article>
+			<p>Necesidad de un nuevo estandar</p>
+			<p>Lluvia de Plugins</p>	
+			<p>Pensado en usuarios y desarrolladores</p>
+			<p>Backwars Compatible</p>
+			<p>Audio y video llegaron</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>
+				Las grandes compañias
+			</h2>
+		</hgroup>
+		<article>
+			<p>Apple le dice no a Flash</p>
+			<p>Google libera Chrome</p>
+			<p>Firefox si dispara en versiones</p>
+		</article>
+	</slide>
+	<slide>
+		<article class="flexbox vcenter">
+			<span><img src="images/HTML5_Logo_128.png" alt=""></span>
+			<h1>HTML 5: Comienza</h1>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Pensar en mobile</h2>
+		</hgroup>
+		<article>
+			<p>Restricciones de los dispositivos</p>
+			<p>Beneficios de los dispositivos</p>
+			<p>Estos ejemplos funcionan en dispositivos moviles</p>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Offline/Online</h2>
+		</hgroup>
+		<iframe  data-src="external/offline.html"></iframe>
+	</slide>
+	<slide>
+		<article class="flexbox vcenter">
+			<span><img src="images/css3_logo_128.png" alt=""></span>
+			<h1>CSS3: Graficos</h1>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Animaciones eficientes</h2>
+		</hgroup>
+		<article>
+<pre class="prettyprint" data-lang="Css">
+.chromelogo{
+	animation: <b>rotate</b> 35s linear infinite;
+}
+@keyframes <b>rotate</b>{
+	0%{...}
+	30%{...}
+	100%{...}
+}
+</pre>
+			<p class="build">Javascript? <span>No Gracias</span></p>	
+			<div class="flexbox vcenter">
+				<style type="text/css">
+				.chromelogo {
+					width: 200px;
+					height:200px;
+					margin: 10px 0 10px 10px;
+					position: relative;
+						-webkit-transition: all 2s linear;
+					-moz-transition: all 2s linear;
+					-o-transition: all 2s linear;
+					-ms-transition: all 2s linear;
+					transition: all 2s linear;
+					-webkit-animation: rotate 35s linear infinite;
+					-moz-animation: rotate 35s linear infinite;
+					-ms-animation: rotate 35s linear infinite;
+					-o-animation: rotate 35s linear infinite;
+					animation: rotate 35s linear infinite;
+				}
+				@-webkit-keyframes rotate{
+						0%{-webkit-transform: rotate(0deg);
+							-moz-transform: rotate(0deg);
+							-o-transform: rotate(0deg);
+							-ms-transform: rotate(0deg);
+							transform: rotate(0deg);}
+						100%{-webkit-transform:rotate(720deg);
+							-moz-transform:rotate(720deg);
+							-o-transform:rotate(720deg);
+							-ms-transform:rotate(720deg);
+							transform:rotate(720deg);}
+				}
+				.chromelogo:hover{
+						-webkit-animation-duration: 0.1s;
+						-moz-animation-duration: 0.1s;
+						-ms-animation-duration: 0.1s;
+						-o-animation-duration: 0.1s;
+						animation-duration: 0.1s;
+				}
+
+				.chromelogo img{
+						border-radius: 100px;
+						width:200px;
+						height:200px;
+				}
+				</style>
+				<div class="chromelogo">
+                		<img src="images/chrome-logo.jpg" />
+				</div>
+			</div>
+</article>
+		
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Graficos acelerados por hardware</h2>
+		</hgroup>
+		<article>
+			<p>Ninguna linea de JavaScript</p>
+			<pre class="prettyprint" data-lang="Css">
+				#box{
+				<b>transform-style: preserve-3d;</b>
+				}
+				#side1{
+				transform: <b>rotateY(-144deg) translateZ(300px)</b>;
+				}
+				#side2{
+				transform: <b>rotateY(-108deg) translateZ(300px)</b>;
+			}
+			</pre>
+
+			<div>
+				<style type="text/css">
+				#box{
+					width:150px;
+					height:300px;
+					-webkit-transform-style: preserve-3d;
+					-webkit-animation: rotateCube 10s linear infinite;
+					-moz-transform-style: preserve-3d;
+					-moz-animation: rotateCube 10s linear infinite;
+					-o-transform-style: preserve-3d;
+					-o-animation: rotateCube 10s linear infinite;
+					-ms-transform-style: preserve-3d;
+					-ms-animation: rotateCube 10s linear infinite;
+					margin-left: 42%;
+				}
+				@-webkit-keyframes rotateCube{
+				    			0% {-webkit-transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);}
+				    			100% {-webkit-transform: rotateY(360deg) rotateX(0deg) rotateZ(0deg);}
+					
+				}
+				@-moz-keyframes rotateCube{
+				    			0% {-moz-transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);}
+				    			100% {-moz-transform: rotateY(360deg) rotateX(0deg) rotateZ(0deg);}
+				}
+				
+				.side{
+					float:left;
+					width: 150px;
+					height: 100px;
+					position: absolute;
+					text-align: center;
+					opacity: 0.5;
+				}
+				.side span{
+					display: block;
+					font-size: 100px;
+					background-color: rgb(71, 170, 71);
+					border-radius: 10px;
+					color: #000000;
+				}
+				
+				#side1{
+					-webkit-transform: rotateY(-144deg) translateZ(300px);
+					-moz-transform: rotateY(-144deg) translateZ(300px);
+					-ms-transform: rotateY(-144deg) translateZ(300px);
+					-o-transform: rotateY(-144deg) translateZ(300px);
+					transform: rotateY(-144deg) translateZ(300px);
+				}
+				#side2{
+					-webkit-transform: rotateY(-108deg) translateZ(300px);
+					-moz-transform: rotateY(-108deg) translateZ(300px);
+					-ms-transform: rotateY(-108deg) translateZ(300px);
+					-o-transform: rotateY(-108deg) translateZ(300px);
+					transform: rotateY(-108deg) translateZ(300px);
+				}
+				#side3{
+					-webkit-transform: rotateY(-72deg) translateZ(300px);
+					-moz-transform: rotateY(-72deg) translateZ(300px);
+					-ms-transform: rotateY(-72deg) translateZ(300px);
+					-o-transform: rotateY(-72deg) translateZ(300px);
+					transform: rotateY(-72deg) translateZ(300px);
+				}
+				#side4{
+					-webkit-transform: rotateY(-36deg) translateZ(300px);
+					-moz-transform: rotateY(-36deg) translateZ(300px);
+					-ms-transform: rotateY(-36deg) translateZ(300px);
+					-o-transform: rotateY(-36deg) translateZ(300px);
+					transform: rotateY(-36deg) translateZ(300px);
+				}
+				#side5{
+					-webkit-transform: translateZ(300px);
+					-moz-transform: translateZ(300px);
+					-ms-transform: translateZ(300px);
+					-o-transform: translateZ(300px);
+					transform: translateZ(300px);
+				}
+				#side6{
+					-webkit-transform: rotateY(36deg) translateZ(300px);
+					-moz-transform: rotateY(36deg) translateZ(300px);
+					-ms-transform: rotateY(36deg) translateZ(300px);
+					-o-transform: rotateY(36deg) translateZ(300px);
+					transform: rotateY(36deg) translateZ(300px);
+				}
+				#side7{
+					-webkit-transform: rotateY(72deg) translateZ(300px);
+					-moz-transform: rotateY(72deg) translateZ(300px);
+					-ms-transform: rotateY(72deg) translateZ(300px);
+					-o-transform: rotateY(72deg) translateZ(300px);
+					transform: rotateY(72deg) translateZ(300px);
+				}
+				#side8{
+					-webkit-transform: rotateY(108deg) translateZ(300px);
+					-moz-transform: rotateY(108deg) translateZ(300px);
+					-ms-transform: rotateY(108deg) translateZ(300px);
+					-o-transform: rotateY(108deg) translateZ(300px);
+					transform: rotateY(108deg) translateZ(300px);
+				}
+				#side9{
+					-webkit-transform: rotateY(144deg) translateZ(300px);
+					-moz-transform: rotateY(144deg) translateZ(300px);
+					-ms-transform: rotateY(144deg) translateZ(300px);
+					-o-transform: rotateY(144deg) translateZ(300px);
+					transform: rotateY(144deg) translateZ(300px);
+				}
+				#side10{
+					-webkit-transform: rotateY(180deg) translateZ(300px);
+					-moz-transform: rotateY(180deg) translateZ(300px);
+					-ms-transform: rotateY(180deg) translateZ(300px);
+					-o-transform: rotateY(180deg) translateZ(300px);
+					transform: rotateY(180deg) translateZ(300px);
+				}
+						</style>
+				<div id="box">
+				<div id="side1" class="side">
+					<span>1</span>
+				</div>
+				<div id="side2" class="side">
+					<span>2</span>
+				</div>
+				<div id="side3" class="side">
+					<span>3</span>
+				</div>
+				<div id="side4" class="side">
+					<span>4</span>
+				</div>
+				<div id="side5" class="side">
+					<span>5</span>
+				</div>
+				<div id="side6" class="side">
+					<span>6</span>
+				</div>
+				<div id="side7" class="side">
+					<span>7</span>
+				</div>
+				<div id="side8" class="side">
+					<span>8</span>
+				</div>
+				<div id="side9" class="side">
+					<span>9</span>
+				</div>
+				<div id="side10" class="side">
+					<span>10</span>
+				</div>
+						</div>
+			</div>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h1>Algo mas complejo</h1>
+			<h3>by <a href="http://codepen.io/juliangarnier">juliangarnier</a></h3>
+		</hgroup>
+		<article style="margin-top:0">
+			<iframe data-src="external/solar/index.html" ></iframe>
+		</article>
+	</slide>
+	<slide>
+		<article class="flexbox vcenter">
+			<span><img src="images/web_gl.png" alt=""></span>
+			<h1>3D en el browser</h1>
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>3d facil con Three.js</h2>
+		</hgroup>
+		<article>
+			<p>Framework para hacer graficos en 3d</p>
+			<p>Variedad de ejemplos</p>
+			<p>Adoptado por mayoria de browsers</p>
+			<p>Aun no es soportado en <a href="http://caniuse.com/#feat=webgl">dispositos moviles</a></p>
+			<iframe data-src="external/threejs/index.html"></iframe>	
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Lo nuevo es:</h2>
+		</hgroup>
+		<article>
+			<p><a href="http://www.html5rocks.com/en/tutorials/pointerlock/intro/">Pointer Lock API</a></p>
+			<p>Permite tomar el control del mouse</p>
+			<p>No es parte de WebGL pero se integra muy bien</p>
+			<iframe data-src="external/pointerlock/index.html"></iframe>	
+		</article>
+	</slide>
+	<slide>
+		<hgroup>
+			<h2>Oh, los juegos que podrias hacer...</h2>
+		</hgroup>
+		<article>
+			<ul>
+				<li>
+					<a href="http://triggerrally.com/x/Preview/Arbusu/drive">TiggerRally</a>
+				</li>
+				<li>
+					<a href="http://media.tojicode.com/q3bsp/">Quake</a>
+				</li>
+				<li>
+					<a href="http://www.playmapscube.com/">Google Maps Cube</a>
+				</li>
+				<li>
+					<a href="http://js13kgames.com/games/johnny-smiter-13th-knight/index.html">13th knight</a>
+				</li>
+				<li>
+					<a href="http://hexgl.bkcore.com/">HexGL</a>
+				</li>
+			</ul>
+			<style type="text/css">
+				#collage img{
+					width: 230px;
+					height: 230px;
+				}
+			</style>
+			<div id="collage" class="flexbox vcenter">
+				<img src="images/13kight.png" alt="" id="13knight">
+				<img src="images/jenga-640x457.jpg" alt="" id="jenga">
+				<img src="images/screen-shot-2012-01-31-at-09-11-05.png" alt="" id="car">
+				<img src="images/triggerrally.jpg" alt="" id="trigger">
+			</div>
 		</article>
 	</slide>
 
+	<slide>
+		<article class="flexbox vcenter">
+			<span><img src="images/HTML5_Multimedia_128.png" alt=""></span>
+			<h1>Multimedia</h1>
+		</article>
+	</slide>
 
+	<slide>
+		<hgroup>
+			<h2>Audio</h2>
+		</hgroup>
+		<article class="build">
+			<p>Permite audio nativo en el browser</p>
+			<p>Antiguo en la especificacion</p>
+			<div class="flexbox vcenter">
+				<audio id="audio-clip" width="670" controls="">
+                <source src="resources/rushus-modal_blues.mp3" type="audio/mpeg">
+                Your browser does not support the audio tag
+              </audio>
+			<div class="media-buttons">
+                <input type="button" id="audio-play-button" onclick="PlayAudio()" value="Play">
+                <input type="button" id="audio-pause-button" onclick="PauseAudio()" value="Pause" disabled="">
+                <input type="button" id="audio-mute" onclick="MuteUnMuteAudio()" value="Mute">
+                <input type="button" id="audio-mute" onclick="removeControls()" value="toggle Controls">
+              </div>
+              <script defer="">
+	            var audioClip = document.getElementById('audio-clip');
+	            var audioPlayButton = document.getElementById('audio-play-button');
+	            var audioPauseButton = document.getElementById('audio-pause-button');
+	            audioClip.addEventListener('ended', OnAudioFinished, false);
 
+	            function PlayAudio() {
+	              audioClip.play();
+	              audioPlayButton.disabled = true;
+	              audioPauseButton.disabled = false;
+	            }
+
+	            function PauseAudio() {
+	              audioClip.pause();
+	              audioPlayButton.disabled = false;
+	              audioPauseButton.disabled = true;
+	            }
+
+	            function MuteUnMuteAudio() {
+	              document.getElementById('audio-mute').value = audioClip.muted ? 'Mute' : 'Unmute';
+	              audioClip.muted = audioClip.muted ? false : true;
+	            }
+
+	            function OnAudioFinished() {
+	              audioPlayButton.disabled = false;
+	              audioPauseButton.disabled = true;
+	            }
+	            function removeControls(){
+	            	var controls=audioClip.getAttribute("controls");
+	            	if(controls!==null){
+	            		audioClip.removeAttribute("controls");
+	            	}
+	            	else{
+	            		audioClip.setAttribute("controls","");
+	            	}
+	            }
+		</article>
+	</slide>
 	<slide>
 		<hgroup>
 			<h2>Slide with Bullets</h2>

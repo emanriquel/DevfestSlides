@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<script type="text/javascript" src="three.min.js"></script>
+	<style type="text/css">
+		canvas{
+			background-color: white;
+			width: 600px;
+			height:600px;
+		}
+	</style>
+</head>
+<body style="text-align:center;">
+	
+	<section id="canvasLocation"></section>
+
+	<script type="text/javascript">
+
+	function Application(){
+		this.element=document.getElementById('details');
+	}
+	Application.prototype.updateConsole=function(html){
+		this.element.innerHTML=html;
+	}
+
+
+	function World(){
+		this.scene=new THREE.Scene();
+	}
+	World.WIDTH=400;
+	World.HEIGHT=300;
+	World.prototype.draw=function(HTMLElement){
+		this.renderer= new THREE.WebGLRenderer();
+		this.renderer.shadowMapEnabled = true;
+		this.renderer.setSize(World.WIDTH,World.HEIGHT);
+		HTMLElement.appendChild(this.renderer.domElement);
+	}
+	World.prototype.add=function(WorldElement){
+		this.scene.add(WorldElement);
+	}
+	World.prototype.render=function(camera){
+		if(this.renderer){
+			this.renderer.render(this.scene, camera)
+		}
+	}
+
+	function Angle(){
+		this.value=0;
+		this.sin=0;
+		this.cos=0;
+	}
+	Angle.prototype.update=function(){
+		this.sin=Math.sin(this.value);
+		this.cos=Math.cos(this.value);
+	}
+
+
+
+	var application=new Application();
+
+
+
+	function Person(){
+		this.angleZX=new Angle();
+		this.angleZY=new Angle();
+		this.rotationConstant=Math.PI/180;
+		//Angles of the Field of View
+		this.fieldOfView=45;
+		this.near=0.1;
+		this.far=10000;
+		this.aspect=World.WIDTH/World.HEIGHT;
+		this.view=new THREE.PerspectiveCamera(this.fieldOfView, this.aspect, this.near, this.far);
+	}
+	Person.prototype.getView=function(){
+		return this.view;
+	}
+	Person.prototype.setLocationX=function(x,y,z){
+		this.view.position.x=x;
+		this.view.position.y=y;
+		this.view.position.z=z;
+	}
+	Person.prototype.setDirection=function(vector){
+		this.view.target=vector;
+		this.view.lookAt(vector);
+		//move the target to the center.
+		var targetZFromCenter=this.view.position.z-this.view.target.z;
+		var targetXFromCenter=this.view.target.x-this.view.position.x;
+		this.angleZX.value=Math.atan2(targetZFromCenter,targetXFromCenter);
+		this.angleZX.update();
+
+	}
+	Person.prototype.turnHorizontal=function(numberOfMoves){
+		this.angleZX.value+=numberOfMoves*this.rotationConstant;
+		this.angleZX.update();
+		this.view.target.z=this.view.position.z-this.angleZX.sin;
+		this.view.target.x=this.view.position.x+this.angleZX.cos;
+		this.view.lookAt(this.view.target);
+	}
+	Person.prototype.lookVertical=function(numberOfMoves){
+		this.angleZY.value+=numberOfMoves*this.rotationConstant;
+		this.angleZY.update();
+		this.view.target.x=this.view.position.x+(this.angleZY.cos*this.angleZX.cos);
+		this.view.target.y=this.view.position.y+this.angleZY.sin;
+		this.view.target.z=this.view.position.z-(this.angleZY.cos*this.angleZX.sin);
+		this.view.lookAt(this.view.target);
+	}
+	Person.prototype.moveForward=function(){
+		this.view.position.z=this.view.position.z-this.angleZX.sin;
+		this.view.position.x=this.view.position.x+this.angleZX.cos;
+		this.view.target.z=this.view.position.z-this.angleZX.sin;
+		this.view.target.x=this.view.position.x+this.angleZX.cos;
+		this.view.lookAt(this.view.target);
+	}
+	Person.prototype.moveBackwards=function(){
+		this.view.position.z=this.view.position.z+this.angleZX.sin;
+		this.view.position.x=this.view.position.x-this.angleZX.cos;
+		this.view.target.z=this.view.position.z-this.angleZX.sin;
+		this.view.target.x=this.view.position.x+this.angleZX.cos;
+		this.view.lookAt(this.view.target);
+	}
+
+	Person.prototype.straffleRight=function(){
+		var rightAngle=this.angleZX.value-(Math.PI/2);
+		this.view.position.z=this.view.position.z-Math.sin(rightAngle);
+		this.view.position.x=this.view.position.x+Math.cos(rightAngle);
+		this.view.target.z=this.view.position.z-this.angleZX.sin;
+		this.view.target.x=this.view.position.x+this.angleZX.cos;
+		this.view.lookAt(this.view.target);
+	}
+	Person.prototype.straffleLeft=function(){
+		var leftAngle=this.angleZX.value+(Math.PI/2);
+		this.view.position.z=this.view.position.z-Math.sin(leftAngle);
+		this.view.position.x=this.view.position.x+Math.cos(leftAngle);
+		this.view.target.z=this.view.position.z-this.angleZX.sin;
+		this.view.target.x=this.view.position.x+this.angleZX.cos;
+		this.view.lookAt(this.view.target);
+	}
+
+
+
+
+
+
+
+
+	window.requestAnimFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function( callback,element) {window.setTimeout(callback, 1000 / 60);};
+	})();
+
+
+
+var world=new World();
+var firstPerson=new Person();
+world.add(firstPerson.view);
+
+firstPerson.view.position.z=200;
+firstPerson.setDirection(new THREE.Vector3( firstPerson.view.position.x, firstPerson.view.position.y, firstPerson.view.position.z-1 ));
+
+var canvasLocation=document.getElementById('canvasLocation');
+world.draw(canvasLocation);
+var radius = 50,
+    segments = 16,
+    rings = 16;
+
+
+var sphereMaterial =
+  new THREE.MeshLambertMaterial(
+    {
+      color: 0xCC0000
+    });
+var sphere = new THREE.Mesh(
+
+  new THREE.CubeGeometry(25, segments, rings),
+
+  sphereMaterial);
+	 sphere.castShadow = true;
+     sphere.receiveShadow = true;
+
+world.add(sphere);
+
+		var pointLight = new THREE.SpotLight(0xFFFFFF);
+
+// set its position
+pointLight.position.x = 10;
+pointLight.position.y = 50;
+pointLight.position.z = 120;
+pointLight.castShadow = true;
+world.add(pointLight);
+
+pointLight=new THREE.SpotLight(0xFFFFFF);
+pointLight.position.x = -30;
+pointLight.position.y = 50;
+pointLight.position.z = 5;
+pointLight.castShadow = true;
+world.add(pointLight);
+
+		var plane=new THREE.PlaneGeometry(500,500,10,10);
+		var planeMat = new THREE.MeshLambertMaterial({color: 0xc0c0c0});
+
+		var planeMesh=new THREE.Mesh(plane,planeMat);
+		planeMesh.rotation.x=-Math.PI/2;
+		planeMesh.position.y = -8;
+		planeMesh.receiveShadow = true;
+		world.add(planeMesh);
+
+// add to the scene
+//world.add(pointLight);
+world.render(firstPerson.view);
+
+
+
+
+
+
+		var isEnabled= 'pointerLockElement' in document || 'webkitPointerLockElement' in document || 'mozPointerLockElement' in document;
+		//var canvasElement=document.getElementById('fpsLocation');
+		var canvasElement=world.renderer.domElement;
+		canvasElement.requestPointerLock=canvasElement.requestPointerLock || canvasElement.webkitRequestPointerLock || canvasElement.mozRequestPointerLock;
+		canvasElement.addEventListener('click',function(){
+			canvasElement.requestPointerLock();
+		}, false);
+
+
+
+		//This is a function that will handle the Move functionality
+		var moveFunction=function(event){
+			 var movementX = event.movementX || event.webkitMovementX || event.mozMovementX || 0;
+			 var movementY = event.movementY || event.webkitMovementY || event.mozMovementY || 0;
+			 firstPerson.turnHorizontal(-movementX/20);
+			 firstPerson.lookVertical(-movementY/20);
+		}
+		var w=false,a=false,s=false,d=false,padRight=false,padLeft=false,padUp=false,padDown=false;
+		var keyDownHandler=function(event){
+			if(event.keyCode===87){
+				w=true;
+				//camera.position.z-=2;
+			}
+			if(event.keyCode===83){
+				//camera.position.z+=2;	
+				s=true;
+			}
+			if(event.keyCode===65){
+				//camera.position.x-=2;	
+				a=true;
+			}
+			if(event.keyCode===68){
+				//camera.position.x+=2;	
+				d=true;
+			}
+			if(event.keyCode===39){
+				padRight=true;
+			}
+			if(event.keyCode===37){
+				padLeft=true;
+			}
+			if(event.keyCode===38){
+				padUp=true;
+			}
+			if(event.keyCode===40){
+				padDown=true;
+			}
+		}
+		var keyUpHandler=function(event){
+			if(event.keyCode===87){
+				w=false;
+			}
+			if(event.keyCode===83){
+				//camera.position.z+=2;	
+				s=false;
+			}
+			if(event.keyCode===65){
+				//camera.position.x-=2;	
+				a=false;
+			}
+			if(event.keyCode===68){
+				//camera.position.x+=2;	
+				d=false;
+			}
+			if(event.keyCode===39){
+				padRight=false;
+			}
+			if(event.keyCode===37){
+				padLeft=false;
+			}
+			if(event.keyCode===38){
+				padUp=false;
+			}
+			if(event.keyCode===40){
+				padDown=false;
+			}
+		}
+
+
+
+		//Add Event Listeners to the document to detect if the Pointer Lock was attached to the Canvas
+		var pointerLockChangeCallBack=function(){
+			if (document.pointerLockElement === canvasElement  || document.webkitPointerLockElement === canvasElement ||  document.mozPointerLockElement === canvasElement ) {
+				document.addEventListener("mousemove", moveFunction, false);
+				window.addEventListener("keydown",keyDownHandler,false);
+				window.addEventListener("keyup",keyUpHandler,false);
+			}
+			else{
+				document.removeEventListener("mousemove", moveFunction,false);
+				window.removeEventListener("keydown",keyDownHandler,false);
+				window.removeEventListener("keyup",keyUpHandler,false);
+			}
+		}
+
+		document.addEventListener('pointerlockchange', pointerLockChangeCallBack, false);
+		document.addEventListener('mozpointerlockchange', pointerLockChangeCallBack, false);
+		document.addEventListener('webkitpointerlockchange', pointerLockChangeCallBack, false);
+
+		var renderCallback=function(){
+
+			if(w===true){
+				firstPerson.moveForward();
+			}
+			if(s===true){
+				firstPerson.moveBackwards();
+			}
+			if(a===true){
+				firstPerson.straffleLeft();
+			}
+			if(d===true){
+				firstPerson.straffleRight();
+			}
+			if(padRight===true){
+				firstPerson.turnHorizontal(-1);
+			}
+			if(padLeft===true){
+				firstPerson.turnHorizontal(1);
+			}
+			if(padUp===true){
+				firstPerson.lookVertical(1);
+			}
+			if(padDown===true){
+				firstPerson.lookVertical(-1);
+			}
+			world.render(firstPerson.view);
+		}
+//Render the View with the Request Animation Frame
+		var render=function(){
+			renderCallback();
+			requestAnimFrame(render);
+		}
+
+		render();
+	</script>
+</body>
+</html>
