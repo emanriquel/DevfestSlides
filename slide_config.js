@@ -1,7 +1,7 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: 'HTML 5 De donde venimos y a donde vamos',
+    title: 'HTML 5',
     subtitle: 'De donde venimos y a donde vamos',
     useBuilds: true, // Default: true. False will turn off slide animation builds.
     usePrettify: true, // Default: true
