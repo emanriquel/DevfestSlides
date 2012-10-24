@@ -170,24 +170,25 @@ slides > slide {
 
     &:before {
       font-size: 12pt;
-      content: $social-tags;
+      content: "http://devfestlima.gdglima.pe/";
       position: absolute;
       bottom: $slide-top-bottom-padding / 2;
       left: $slide-left-right-padding;
-      background: url(../../images/downbar.png) no-repeat 0% 50%;
-      @include background-size(100% 30px);
+      background: url(../../images/gdglogo.png) no-repeat 0 50%;
+      @include background-size($brand-small-icon-size $brand-small-icon-size);
       padding-left: $brand-small-icon-size + 10;
       height: $brand-small-icon-size;
       line-height: 1.9;
     }
-    /*&:after {
+    &:after {
       font-size: 12pt;
-      content: attr(data-slide-num) '/' attr(data-total-slides);
+      content: "#devfestLima";
       position: absolute;
+      color: red;
       bottom: $slide-top-bottom-padding / 2;
       right: $slide-left-right-padding;
       line-height: 1.9;
-    }*/
+    }
   }
 
   &.title-slide {
