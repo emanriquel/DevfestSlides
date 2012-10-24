@@ -781,10 +781,13 @@ objectStore.put({
 					
 				</div>
 				<div id="Inputs">
-					<input type="text" placeholder="Nombre" name="nombre" id="nombre">
-					<input type="text" placeholder="Apellido" name="apellido" id="apellido">
-					<input type="text" placeholder="Direccion" name="direccion" id="direccion">
-					<input type="tel" pattern="^\(?\d{3}\)?[-\s]\d{3}[-\s]\d{4}.*?$" placeholder="(555) 555-5555" name="telefono" id="telefono">
+					<ul>
+					<li><input type="text" placeholder="Nombre" name="nombre" id="nombre"></li>
+					<li><input type="text" placeholder="Apellido" name="apellido" id="apellido"></li>
+					<li><input type="text" placeholder="Direccion" name="direccion" id="direccion"></li>
+					<li><input type="tel" pattern="\d{3}[-\s]\d{4}.*?$" placeholder="555-5555" name="telefono" id="telefono">	</li>
+					</ul>
+					
 				</div>
 				<ul id="ContactList">
 				</ul>	
@@ -1033,9 +1036,9 @@ objectStore.put({
 		</article>
 	</slide>
 	<slide class="fill nobackground" style="background: url(images/services.jpg);background-size:100% 100%;">
-		<hgroup>
+		<aside class="gdbar">
 			<h2>La web tiene un problema</h2>
-		</hgroup>
+		</aside>
 		<footer class="source">Imagina integrar todo eso</footer>
 	</slide>
 	<slide class="fill nobackground" style="background: url(images/no.png);background-size:100% 100%;;">
@@ -1121,7 +1124,7 @@ objectStore.put({
 	</slide>
 	<slide class="logoslide dark nobackground">
 		<article class="flexbox vcenter">
-			<span><img src="images/gdglima.png"></span>
+			<span><img src="images/gdglima.png" style="height: auto;"></span>
 		</article>
 	</slide>
 
