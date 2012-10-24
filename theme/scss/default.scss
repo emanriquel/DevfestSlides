@@ -909,6 +909,16 @@ aside.gdbar {
     top: initial;
     bottom: $slide-left-right-padding;
   }
+  &.top {
+    top: -moz-initial;
+    top: $slide-left-right-padding;
+    @include transform(none !important);
+    span{
+      font-weight: bolder;
+      margin: 33px 15px;
+      position: absolute;
+    }
+  }
 
   img {
     width: 85px;

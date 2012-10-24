@@ -20,10 +20,10 @@ var SLIDE_CONFIG = {
   presenters: [{
     name: 'Manuel Manrique',
     company: 'Software Engineer',
-    gplus: 'http://gplus.to/mmanrique',
-    twitter: '@mmanrique',
-    www: 'http://www.lamemoteca.com',
-    github: 'http://github.com/mmanrique'
+    gplus: 'gdglima@googlegroups.com',
+    twitter: '@gdglima',
+    www: 'http://devfestlima.gdglima.pe'
+    //github: ''
   }/*, {
     name: 'Second Name',
     company: 'Job Title, Google',
