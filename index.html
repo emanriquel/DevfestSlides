@@ -803,7 +803,10 @@ objectStore.put({
 	//IDBTransaction is deprected to use as READ_WRITE
 	//window.IDBTransaction=window.IDBTransaction || window.webkitIDBTransaction || window.mozIDBTransaction;
 
-
+	var nombre = document.getElementById("nombre");
+	var apellido = document.getElementById("apellido");
+	var direccion = document.getElementById("direccion");
+	var telefono = document.getElementById("telefono");
 	function Application() {
 		this.version = "0.1";
 		this.databaseName = "HTML5";
@@ -889,6 +892,10 @@ objectStore.put({
 		});
 		putRequest.onsuccess = function(e) {
 			//after it's saved, clear the values;
+			nombre.value="";
+			apellido.value="";
+			direccion.value="";
+			telefono.value="";
 			self.getDataOut();
 
 		}
@@ -979,12 +986,6 @@ objectStore.put({
 	var guardarButton = document.getElementById("guardarButton");
 	var searchbox=document.getElementById("searchbox");
 	var searchNumber=document.getElementById("searchNumber");
-
-
-	var nombre = document.getElementById("nombre");
-	var apellido = document.getElementById("apellido");
-	var direccion = document.getElementById("direccion");
-	var telefono = document.getElementById("telefono");
 	guardarButton.addEventListener("click", function() {
 		application.insertData(nombre.value, apellido.value, direccion.value, telefono.value);
 	}, false);
@@ -1036,7 +1037,7 @@ objectStore.put({
 		</article>
 	</slide>
 	<slide class="fill nobackground" style="background: url(images/services.jpg);background-size:100% 100%;">
-		<aside class="gdbar">
+		<aside class="gdbar" style="width: 50%;">
 			<h2>La web tiene un problema</h2>
 		</aside>
 		<footer class="source">Imagina integrar todo eso</footer>
